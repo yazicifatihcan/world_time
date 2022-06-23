@@ -22,6 +22,7 @@ class LightTheme {
           primary: LightThemeColors.instance!.lustfulWishes, secondary: LightThemeColors.instance!.wizardWhite,surface:LightThemeColors.instance!.washMe,outline: LightThemeColors.instance!.wizardWhiteLowOpacity,secondaryContainer: LightThemeColors.instance!.white,onSurface: LightThemeColors.instance!.lustfulWishes, onSecondaryContainer: LightThemeColors.instance!.white,tertiary: LightThemeColors.instance!.lustfulWishes),
       textTheme: TextTheme(
           headline1: TextStyle(
+          
         fontSize: 32,
         fontWeight: FontWeight.w600,
         color: LightThemeColors.instance!.lustfulWishes

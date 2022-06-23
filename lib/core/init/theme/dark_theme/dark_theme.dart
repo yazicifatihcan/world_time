@@ -18,7 +18,7 @@ class DarkTheme {
       fontFamily: "Montserrat",
       inputDecorationTheme: InputDecorationTheme(fillColor: DarkThemeColors.instance!.white,filled: true,focusedBorder: _outlineInputBorder,enabledBorder:_outlineInputBorder),
       colorScheme: ColorScheme.light(
-          primary: DarkThemeColors.instance!.washMe, secondary: DarkThemeColors.instance!.darkMidnightBlue,surface:DarkThemeColors.instance!.lustfulWishes,outline: DarkThemeColors.instance!.wizardWhiteLowOpacity,secondaryContainer: DarkThemeColors.instance!.white,onSurface: DarkThemeColors.instance!.darkMidnightBlue,onSecondaryContainer: DarkThemeColors.instance!.darkMidnightBlue,tertiary: DarkThemeColors.instance!.lustfulWishes),
+          primary: DarkThemeColors.instance!.washMe, secondary: DarkThemeColors.instance!.darkMidnightBlue,surface:DarkThemeColors.instance!.lustfulWishes,outline: DarkThemeColors.instance!.lustfulWishesLowOpacity,secondaryContainer: DarkThemeColors.instance!.white,onSurface: DarkThemeColors.instance!.darkMidnightBlue,onSecondaryContainer: DarkThemeColors.instance!.darkMidnightBlue,tertiary: DarkThemeColors.instance!.lustfulWishes),
       textTheme: TextTheme(
           headline1: TextStyle(
         fontSize: 32,

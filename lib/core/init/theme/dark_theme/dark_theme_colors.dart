@@ -10,12 +10,9 @@ class DarkThemeColors {
   DarkThemeColors._init();
 
   Color darkMidnightBlue = const Color(0xFF02327D);
-    Color washMe = const Color(0xFFFAFCFF);
+  Color washMe = const Color(0xFFFAFCFF);
   Color lustfulWishes = const Color(0xFF002359);
-  Color wizardWhiteLowOpacity = const Color(0xFFE3EEFF).withOpacity(0.2);
+  Color lustfulWishesLowOpacity = const Color(0xFF002359).withOpacity(0.2);
+
   Color white = const Color(0xFFFFFFFF);
-
-
-
-
 }

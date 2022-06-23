@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:world_time/core/extension/context_extension.dart';
+import 'package:world_time/core/extension/string_extension.dart';
 import 'package:world_time/view/detail_page/view/detail_page_view.dart';
 
 class CustomTileDesign extends StatelessWidget {
-  CustomTileDesign({super.key,required this.index});
+  CustomTileDesign({super.key, required this.title,required this.index});
   int index;
-
+  String title;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -24,7 +25,7 @@ class CustomTileDesign extends StatelessWidget {
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Africa, Abidjan",
+                    title.formatTimeZoneName(),
                     style: context.textTheme.headline2!
                         .copyWith(fontWeight: FontWeight.w400),
                   )),
@@ -34,33 +35,26 @@ class CustomTileDesign extends StatelessWidget {
         Positioned(
           bottom: context.dynamicHeight(4),
           right: context.dynamicWidth(5),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailPageView()));
-            },
-            child: Container(
-                height: context.dynamicHeight(46),
-                width: context.dynamicWidth(30),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: context.theme.colorScheme.surface,
-                        width: context.dynamicWidth(3))),
-                child: FloatingActionButton(
-                  heroTag: index,
-                  elevation: 0,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DetailPageView()));
-                  },
-                  child:  Icon(Icons.chevron_right_outlined,color:context.theme.colorScheme.primary),
-                )),
-          ),
+          child: Container(
+              height: context.dynamicHeight(46),
+              width: context.dynamicWidth(30),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: context.theme.colorScheme.surface,
+                      width: context.dynamicWidth(3))),
+              child: FloatingActionButton(
+                heroTag: index,
+                elevation: 0,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailPageView(path: title,)));
+                },
+                child: Icon(Icons.chevron_right_outlined,
+                    color: context.theme.colorScheme.primary),
+              )),
         )
       ],
     );

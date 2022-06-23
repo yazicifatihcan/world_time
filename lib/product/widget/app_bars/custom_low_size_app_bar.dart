@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:world_time/core/constants/enums/image_enums.dart';
 import 'package:world_time/core/extension/context_extension.dart';
+import 'package:world_time/core/init/cache/locale_manager.dart';
+
+import '../../../core/constants/enums/preference_keys.dart';
 
 class CustomLowSizeAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -35,7 +38,7 @@ class CustomLowSizeAppBar extends StatelessWidget
                 SizedBox(
                   width: context.dynamicWidth(149),
                   height: context.dynamicHeight(16),
-                  child: ImageEnums.app_logo_light.toAssetImage(),
+                  child: LocaleManager.instance.getBoolValue(PreferencesKeys.isThemeLight) ? ImageEnums.app_logo.toAssetImage():ImageEnums.app_logo_light.toAssetImage(),
                 ),
                 const Spacer(),
               ],
