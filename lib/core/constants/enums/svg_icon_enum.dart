@@ -5,7 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 enum SvgEnums {
   search_icon,
-  
+  light_mode_icon,
+  dark_mode_icon
 }
 
 extension ImagePathsExtension on SvgEnums {

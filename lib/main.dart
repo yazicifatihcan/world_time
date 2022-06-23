@@ -4,7 +4,7 @@ import 'package:world_time/core/init/theme/light_theme/light_theme.dart';
 import 'package:world_time/view/home_page/view/home_page_view.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
 

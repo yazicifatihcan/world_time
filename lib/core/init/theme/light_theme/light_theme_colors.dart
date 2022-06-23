@@ -12,6 +12,7 @@ class LightThemeColors {
   Color wizardWhite = const Color(0xFFE3EEFF);
   Color white = const Color(0xFFFFFFFF);
   Color lustfulWishes = const Color(0xFF002359);
+  Color wizardWhiteLowOpacity = const Color(0xFFE3EEFF).withOpacity(0.2);
   Color blueSkiesToday = const Color(0xFF8FAFE0);
   Color washMe = const Color(0xFFFAFCFF);
 }

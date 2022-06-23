@@ -16,7 +16,7 @@ class CustomSearchBar extends StatelessWidget {
         child: TextFormField(
           inputFormatters: [FilteringTextInputFormatter.allow(RegexConstants.instance.nameRegExp)],
           controller: controller,
-          decoration:  InputDecoration(prefixIcon: SvgEnums.search_icon.svgIcon(),label: Text("Arama",style: context.textTheme.subtitle1,)),
+          decoration:  InputDecoration(prefixIcon: SvgEnums.search_icon.svgIcon(),label: Text("Arama",style: context.textTheme.subtitle1!.copyWith(color: context.theme.colorScheme.tertiary),)),
         ));
   }
 }

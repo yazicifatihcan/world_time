@@ -25,19 +25,23 @@ extension ThemeExtension on BuildContext {
 extension BorderRadiusExtension on BuildContext {
   Radius get appBarBottomRadius => Radius.circular(dynamicHeight(32));
   Radius get searchFieldBorderRadius => Radius.circular(dynamicHeight(99));
+  Radius get listTileBorderRadius => Radius.circular(dynamicHeight(8));
 }
 
 extension EmptySizedBox on BuildContext {
-  SizedBox get emptyHighSizedBoxHeight => SizedBox(
-        height: dynamicHeight(55),
+  SizedBox emptyDynamicHeightSizedBox(double value) => SizedBox(
+        height: dynamicHeight(value),
       );
-  SizedBox get emptyLowSizedBoxHeight => SizedBox(
-        height: dynamicHeight(5),
+
+    SizedBox emptyDynamicWidthSizedBox(double value) => SizedBox(
+        width: dynamicWidth(value),
       );
+
 }
 
 extension PaddingExtensionAll on BuildContext {
-  // EdgeInsets get paddingLow => EdgeInsets.all(lowValue);
+  EdgeInsets paddingDynamicRight(double value) =>
+      EdgeInsets.only(right: (dynamicWidth(20)));
   // EdgeInsets get paddingNormal => EdgeInsets.all(normalValue);
   // EdgeInsets get paddingMedium => EdgeInsets.all(mediumValue);
   // EdgeInsets get paddingHigh => EdgeInsets.all(highValue);
@@ -54,6 +58,12 @@ extension PaddingExtensionSymetric on BuildContext {
 
   EdgeInsets get paddingGeneralHorizontal =>
       EdgeInsets.symmetric(horizontal: dynamicWidth(33));
+  EdgeInsets get generalHomePageBodyPadding =>
+      EdgeInsets.only(left: dynamicWidth(33), right: dynamicWidth(18));
+  EdgeInsets get customTilePadding => EdgeInsets.only(bottom: dynamicWidth(10));
+  EdgeInsets get onlyLeftPadding => EdgeInsets.only(left: dynamicWidth(20));
+  EdgeInsets get customLowSizeAppBar => EdgeInsets.only(left: dynamicWidth(38),right:dynamicWidth(38) ,bottom:dynamicHeight(24) );
+
   // EdgeInsets get paddingNormalHorizontal =>
   //     EdgeInsets.symmetric(horizontal: normalValue);
   // EdgeInsets get paddingMediumHorizontal =>

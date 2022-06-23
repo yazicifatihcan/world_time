@@ -14,11 +14,12 @@ class LightTheme {
   
 
   ThemeData lightTheme = ThemeData(
+    iconTheme: IconThemeData(color:LightThemeColors.instance!.lustfulWishes ),
     scaffoldBackgroundColor: LightThemeColors.instance!.washMe,
       fontFamily: "Montserrat",
       inputDecorationTheme: InputDecorationTheme(fillColor: LightThemeColors.instance!.white,filled: true,focusedBorder: _outlineInputBorder,enabledBorder:_outlineInputBorder),
       colorScheme: ColorScheme.light(
-          primary: LightThemeColors.instance!.lustfulWishes, secondary: LightThemeColors.instance!.wizardWhite,),
+          primary: LightThemeColors.instance!.lustfulWishes, secondary: LightThemeColors.instance!.wizardWhite,surface:LightThemeColors.instance!.washMe,outline: LightThemeColors.instance!.wizardWhiteLowOpacity,secondaryContainer: LightThemeColors.instance!.white,onSurface: LightThemeColors.instance!.lustfulWishes, onSecondaryContainer: LightThemeColors.instance!.white,tertiary: LightThemeColors.instance!.lustfulWishes),
       textTheme: TextTheme(
           headline1: TextStyle(
         fontSize: 32,
@@ -32,7 +33,13 @@ class LightTheme {
         fontSize: 12,
         fontWeight: FontWeight.w300,
         color: LightThemeColors.instance!.lustfulWishes
-      )));
+      ),
+      subtitle2: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: LightThemeColors.instance!.lustfulWishes
+      )
+      ));
 }
 
 final OutlineInputBorder _outlineInputBorder=OutlineInputBorder(borderSide: BorderSide(color: LightThemeColors.instance!.blueSkiesToday),borderRadius: const BorderRadius.all(Radius.circular(92)));
