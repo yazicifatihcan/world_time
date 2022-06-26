@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:world_time/core/base/base_view_model/base_view_model.dart';
@@ -15,8 +16,7 @@ abstract class _DetailPageViewModelBase with Store, BaseViewModel {
   @override
   void init() async{
     changeLoading();
-    districtTimeData=await NetworkManager.instance!.getDistrictTimeData(path);
-
+    districtTimeData=await compute(NetworkManager.instance!.getDistrictTimeData,path);
     changeLoading();
   }
 

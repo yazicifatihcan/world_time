@@ -1,0 +1,11 @@
+{
+    "general":{
+        "greenwichTime":"GMT",
+        "search":"Arama",
+        "morning":"Günaydın",
+        "afternoon":"Tünaydın",
+        "evening":"İyi Akşamlar",
+        "night":"İyi geceler"
+    }
+
+}

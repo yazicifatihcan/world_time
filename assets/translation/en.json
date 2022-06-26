@@ -1,0 +1,11 @@
+{
+    "general":{
+        "greenwichTime":"GMT",
+        "search":"Search",
+        "morning":"Good Morning",
+        "afternoon":"Good Afternoon",
+        "evening":"Good Evening",
+        "night":"Good Night"
+    }
+
+}

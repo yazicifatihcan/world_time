@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:world_time/core/base/base_view/base_widget.dart';
-import 'package:world_time/core/constants/enums/lottie_enums.dart';
 import 'package:world_time/core/extension/context_extension.dart';
 import 'package:world_time/core/extension/date_time_format_extension.dart';
 import 'package:world_time/core/extension/string_extension.dart';
 import 'package:world_time/product/widget/app_bars/custom_low_size_app_bar.dart';
+import 'package:world_time/product/widget/loading_widget.dart';
 import 'package:world_time/view/detail_page/view_model/detail_page_view_model.dart';
 
 class DetailPageView extends StatelessWidget {
-  DetailPageView({super.key, required this.path});
-  String path;
+  const DetailPageView({super.key});
   @override
   Widget build(BuildContext context) {
+    final String path =
+        (ModalRoute.of(context)!.settings.arguments as String);
     return BaseView<DetailPageViewModel>(
         viewModel: DetailPageViewModel(path: path),
         onPageBuilder: (context, model) {
           return Scaffold(
             appBar: CustomLowSizeAppBar(height: context.dynamicHeight(79)),
-            body: Padding(
-              padding: context.generalHomePageBodyPadding,
-              child: _buildBody(context, model),
-            ),
+            body: Observer(builder: (_) {
+              return Padding(
+                padding: context.generalHomePageBodyPadding,
+                child: model.isLoading ? const LoadingWidget(): _buildBody(context, model),
+              );
+            }),
           );
         },
         onModelReady: (model) {
@@ -30,78 +33,77 @@ class DetailPageView extends StatelessWidget {
         });
   }
 
-  Observer _buildBody(BuildContext context, DetailPageViewModel model) {
-    return (Observer(builder: (_) {
-      // print(model.districtTimeData!.datetime!.hour);
-      return Column(
+  Column _buildBody(BuildContext context, DetailPageViewModel model) {
+    return Column(
+      children: [
+        context.emptyDynamicHeightSizedBox(50),
+        _buildTimePart(context, model),
+        context.emptyDynamicHeightSizedBox(28),
+        _buildBoldText(model, context,model.districtTimeData?.timezone?.countryName()),
+        context.emptyDynamicHeightSizedBox(5),
+        _buildSubText(model, context, model.districtTimeData?.timezone?.continentName()),
+        context.emptyDynamicHeightSizedBox(10),
+      
+        _buildSubText(model, context,  model.districtTimeData == null
+              ? ""
+              : ((model.districtTimeData!.datetime!.weekDayPlusYear!) +
+                  ", " +
+                  (model.districtTimeData!.abbreviation!)),),
+        _buildSubText(model, context,model.districtTimeData?.datetime?.dayMonthFullDayNameDetailPage(context)),
+      ],
+    );
+  }
+
+  Text _buildBoldText(DetailPageViewModel model, BuildContext context,String? content) {
+    return Text(
+         content ?? "",
+        textAlign: TextAlign.center,
+        style: context.textTheme.subtitle2!
+            .copyWith(fontSize: 20, fontWeight: FontWeight.w600),
+      );
+  }
+
+  Text _buildSubText(DetailPageViewModel model, BuildContext context,String? content) {
+    return Text(
+        content ??
+            "",
+        style: context.textTheme.subtitle2,
+        textAlign: TextAlign.center,
+      );
+  }
+
+  Row _buildTimePart(BuildContext context, DetailPageViewModel model) {
+    return Row(
         children: [
-          model.isLoading
-              ? LottieEnums.lottie_loading
-                  .toLottieAsset(height: context.dynamicHeight(50))
-              : context.emptyDynamicHeightSizedBox(50),
-          Row(
+          _buildTimeBoxMethod(
+              context,
+              model,
+              model.districtTimeData?.datetime?.hour),
+          context.emptyDynamicWidthSizedBox(10),
+          Column(
             children: [
-              _buildTimeBoxMethod(
-                  context,
-                  model,
-                  model.districtTimeData?.datetime?.hour.toString().addingDigit
-                      .toString()
-                      .addingDigit),
-              context.emptyDynamicWidthSizedBox(10),
-              Column(
-                children: [
-                  _buildDotMethod(context),
-                  context.emptyDynamicHeightSizedBox(16),
-                  _buildDotMethod(context),
-                ],
-              ),
-              context.emptyDynamicWidthSizedBox(10),
-              _buildTimeBoxMethod(
-                  context,
-                  model,
-                  model.districtTimeData?.datetime?.minute.toString().addingDigit
-                      .toString()
-                      .addingDigit),
+              _buildDotMethod(context),
+              context.emptyDynamicHeightSizedBox(16),
+              _buildDotMethod(context),
             ],
           ),
-          context.emptyDynamicHeightSizedBox(28),
-          Text(
-            model.districtTimeData?.timezone?.countryName() ?? 
-            "",
-            textAlign: TextAlign.center,
-            style: context.textTheme.subtitle2!
-                .copyWith(fontSize: 20, fontWeight: FontWeight.w600),
-          ),
-          context.emptyDynamicHeightSizedBox(5),
-          Text(
-            model.districtTimeData?.timezone?.continentName() ?? 
-            "",
-            style: context.textTheme.subtitle2,
-            textAlign: TextAlign.center,
-          ),
-          context.emptyDynamicHeightSizedBox(10),
-          Text(
-            model.districtTimeData==null ?"": ((model.districtTimeData!.datetime!.weekDayPlusYear!) +", "+ (model.districtTimeData!.abbreviation!)),
-            style: context.textTheme.subtitle2,
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            model.districtTimeData?.datetime?.dayMonthFullDayNameDetailPage() ?? 
-            "",
-            style: context.textTheme.subtitle2,
-            textAlign: TextAlign.center,
-          ),
+          context.emptyDynamicWidthSizedBox(10),
+          _buildTimeBoxMethod(
+              context,
+              model,
+              model.districtTimeData?.datetime?.minute
+                  
+                  ),
         ],
       );
-    }));
   }
 
   Container _buildTimeBoxMethod(
-      BuildContext context, DetailPageViewModel model, String? hourOrMinute) {
+      BuildContext context, DetailPageViewModel model, int? hourOrMinute) {
     return Container(
       child: Center(
           child: Text(
-        hourOrMinute ?? "",
+        hourOrMinute.toString().addingDigit,
         style: context.textTheme.headline1!.copyWith(fontSize: 79),
       )),
       width: context.dynamicWidth(140),
@@ -123,3 +125,5 @@ class DetailPageView extends StatelessWidget {
         ),
       );
 }
+
+

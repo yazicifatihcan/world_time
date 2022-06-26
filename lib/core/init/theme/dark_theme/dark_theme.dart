@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_time/core/constants/app_constants/app_constants.dart';
 import 'package:world_time/core/init/theme/dark_theme/dark_theme_colors.dart';
 
 
@@ -15,7 +16,7 @@ class DarkTheme {
     iconTheme: IconThemeData(color:DarkThemeColors.instance!.white ),
     scaffoldBackgroundColor: DarkThemeColors.instance!.lustfulWishes,
       
-      fontFamily: "Montserrat",
+      fontFamily: ApplicationConstants.APP_ASSET_FONT,
       inputDecorationTheme: InputDecorationTheme(fillColor: DarkThemeColors.instance!.white,filled: true,focusedBorder: _outlineInputBorder,enabledBorder:_outlineInputBorder),
       colorScheme: ColorScheme.light(
           primary: DarkThemeColors.instance!.washMe, secondary: DarkThemeColors.instance!.darkMidnightBlue,surface:DarkThemeColors.instance!.lustfulWishes,outline: DarkThemeColors.instance!.lustfulWishesLowOpacity,secondaryContainer: DarkThemeColors.instance!.white,onSurface: DarkThemeColors.instance!.darkMidnightBlue,onSecondaryContainer: DarkThemeColors.instance!.darkMidnightBlue,tertiary: DarkThemeColors.instance!.lustfulWishes),

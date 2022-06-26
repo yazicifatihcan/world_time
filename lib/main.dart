@@ -1,20 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:world_time/core/constants/app_constants/app_constants.dart';
 import 'package:world_time/core/constants/enums/preference_keys.dart';
+import 'package:world_time/core/constants/navigation/navigation_constants.dart';
 import 'package:world_time/core/init/cache/locale_manager.dart';
+import 'package:world_time/core/init/general_init/general_init.dart';
 import 'package:world_time/core/init/notifier/theme_notifier.dart';
-import 'package:world_time/view/home_page/view/home_page_view.dart';
+import 'package:world_time/core/init/routes/routes.dart';
+
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await LocaleManager.prefrencesInit();
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  runApp(ChangeNotifierProvider<ThemeNotifier>(
-    create: (context) => ThemeNotifier(isLight:LocaleManager.instance.getBoolValue(PreferencesKeys.isThemeLight)),
-    builder: (context, child) => const MyApp(),
+  final GeneralInit _generalInit = GeneralInit();
+  await _generalInit.init();
+  runApp(EasyLocalization(
+    supportedLocales: _generalInit.languageInit.supportedLocales,
+    path: _generalInit.languageInit.languagePath,
+    fallbackLocale: _generalInit.languageInit.supportedLocales[0],
+
+    child: ChangeNotifierProvider<ThemeNotifier>(
+      create: (context) => ThemeNotifier(isLight:LocaleManager.instance.getBoolValue(PreferencesKeys.isThemeLight)),
+      builder: (context, child) => const MyApp(),
+    ),
   ));
 }
 
@@ -24,9 +31,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      title: ApplicationConstants.APP_NAME,
       theme: context.watch<ThemeNotifier>().currentTheme,
-      home: const HomePageView(),
+      initialRoute: NavigationConstants.homePage,
+      routes: routes,
       debugShowCheckedModeBanner: false,
     );
   }

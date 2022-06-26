@@ -15,6 +15,7 @@ class ThemeNotifier extends ChangeNotifier {
 
   ThemeData get currentTheme => _currentTheme;
 
+  //isLight value cames from the cache.
   ThemeNotifier({required bool isLight}) {
     _currentTheme = isLight
         ? LightTheme.instance!.lightTheme
@@ -22,6 +23,8 @@ class ThemeNotifier extends ChangeNotifier {
     _currenThemeEnum = isLight ? AppThemes.light : AppThemes.dark;
   }
 
+
+  //this func changes the theme and saves the last theme to cache
   void changeTheme() {
     if (_currenThemeEnum == AppThemes.light) {
       _currentTheme = DarkTheme.instance!.lightTheme;
