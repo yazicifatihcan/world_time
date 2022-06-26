@@ -41,10 +41,16 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
                 ? isThereConnection = false
                 : null);
     // thanks to the function below we'll know if user lost connection or connects after losing it.
-    subscription=_connectivity.onConnectivityChanged.listen((event) {
-      isThereConnection= (event== ConnectivityResult.none) ?  false : true;
+    subscription = _connectivity.onConnectivityChanged.listen((event) async {
+      isThereConnection = (event == ConnectivityResult.none) ? false : true;
+      if (isThereConnection == true && timezones.isEmpty) {
+        changeLoadingState();
+        await getTimezone();
+        changeLoadingState();
+      }
     });
 
+    await getTimezone();
     // Knowing each time when user type something to search field
     searchFieldController.addListener(() {
       filterTimezoneList();
@@ -62,6 +68,13 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
   @action
   void setLanguage(Locale language, BuildContext context) {
     context.setLocale(language);
+  }
+
+  Future<void> getTimezone() async {
+    List<dynamic>? timezoneResponse = await compute(getTimezones, "");
+    timezoneResponse?.forEach((element) {
+      timezones.add(element.toString());
+    });
   }
 
   void onDispose() {
