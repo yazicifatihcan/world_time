@@ -1,7 +1,7 @@
 
 # World Time
 
-World Time is an application that shows the timezones. ( Just for android)
+World Time is an application that shows the timezones( Just for android).
 Please [click here](https://youtu.be/A4FalNzpMU0) to see the application video.
     
 ## Screenshots
